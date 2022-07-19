@@ -6,11 +6,11 @@ export function ColorsConfigurations({ navigation }) {
             <View style={{ margin: 20, padding: 20 }}>
                 <Text>Configurações de cores</Text>
                 
-                <TouchableOpacity onPress={() => navigation.navigate('Configurações de fonte')}>
+                <TouchableOpacity onPress={() => {}}>
                     <Text>Cores escuras</Text>
                 </TouchableOpacity>
                 
-                <TouchableOpacity onPress={() => navigation.navigate('Configurações de cores')}>
+                <TouchableOpacity onPress={() => {}}>
                     <Text>Cores claras</Text>
                 </TouchableOpacity>
             </View>
