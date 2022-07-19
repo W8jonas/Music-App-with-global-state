@@ -8,16 +8,39 @@ import { Configurations } from './source/screens/Configurations';
 import { FontConfigurations } from './source/screens/FontConfigurations';
 import { ColorsConfigurations } from './source/screens/ColorsConfigurations';
 import { Home } from './source/screens/Home';
+import { useState } from 'react';
 
 
 const Stack = createStackNavigator();
 
-function StackNavigator() {
+function StackNavigator({handleUpdateFonte, fontSize}) {
+
 	return (
 		<Stack.Navigator>
-			<Stack.Screen name="Configurações" component={Configurations} />
-			<Stack.Screen name="Configurações de fonte" component={FontConfigurations} />
-			<Stack.Screen name="Configurações de cores" component={ColorsConfigurations} />
+			<Stack.Screen
+				name="Configurações"
+				component={Configurations}
+			/>
+
+			<Stack.Screen
+				name="Configurações de fonte"
+				component={
+					function RenderFontConfigurations(props) {
+						return (
+							<FontConfigurations
+								{...props}
+								handleUpdateFonte={handleUpdateFonte}
+								fontSize={fontSize}
+							/>
+						)
+					}
+				}
+			/>
+
+			<Stack.Screen
+				name="Configurações de cores"
+				component={ColorsConfigurations}
+			/>
 		</Stack.Navigator>
 	);
 }
@@ -26,6 +49,12 @@ function StackNavigator() {
 const Tabs = createBottomTabNavigator();
 
 export default function App() {
+
+	const [fontSize, setFontSize] = useState(16)
+
+	function handleUpdateFonte(newFontSize) {
+		setFontSize(newFontSize)
+	}
 
 	return (
 		<NavigationContainer>
@@ -40,10 +69,22 @@ export default function App() {
 					},
 				}}
 			>
-				<Tabs.Screen name="Primeira tela" component={Home} />
-				<Tabs.Screen name="Segunda tela" component={StackNavigator} />
+
+				<Tabs.Screen
+					name="Home"
+					component={function RenderHome(props) {
+						return <Home {...props} fontSize={fontSize} />
+					}}
+				/>
+
+				<Tabs.Screen
+					name="Configurações"
+					component={function RenderStackNavigator(props) {
+						return <StackNavigator {...props} handleUpdateFonte={handleUpdateFonte} fontSize={fontSize} />
+					}}
+				/>
+
 			</Tabs.Navigator>
 		</NavigationContainer>
 	)
 }
-
