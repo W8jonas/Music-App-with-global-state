@@ -1,24 +1,15 @@
 import {useState, useEffect, useMemo} from 'react'
 
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
 
 function RenderTitle(props) {
 	return <Text style={props.customStyle}>{props.text}</Text>
 }
 
-export default function StatesScreen() {
+export default function StatesScreen({ navigation }) {
 
 	const [counter, setCounter] = useState(0)
 
-	// const [doubleCounter, setDoubleCounter] = useState(0)
-
-	// Não necessariamente síncrono!!!!
-	// useEffect(() => {
-	// 	// execução de função que demora 2 segundos para responder ===>>> 
-	// 	setDoubleCounter(counter * 2)
-	// }, [counter])
-
-	// síncronos!!!!
 	const doubleCounter = useMemo(() => {
 		return counter * 2
 	}, [counter])
@@ -39,6 +30,13 @@ export default function StatesScreen() {
 
 			<Text>Valor: {counter}</Text>
 			<Text>Valor dobrado: {doubleCounter}</Text>
+
+
+			<Button
+				title="Voltar para primeira tela"
+				onPress={() => navigation.navigate('Primeira tela')}
+			/>
+
 		</View>
 	);
 }

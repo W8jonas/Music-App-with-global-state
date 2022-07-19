@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native';
 
 function RenderTitle(props) {
 	return <Text style={props.customStyle}>{props.text}</Text>
@@ -31,7 +31,7 @@ const OrderTypes = {
 	desc: 'desc',
 }
 
-export default function FirstScreen() {
+export function Home({ navigation }) {
 
 	const [order, setOrder] = useState(OrderTypes.asc)
 
@@ -71,6 +71,11 @@ export default function FirstScreen() {
 					title="Lista de participantes do projeto:"
 					names={listNamesOrder}
 				/>
+
+			<Button
+				title="Mudar para segunda tela "
+				onPress={() => navigation.navigate('Segunda tela')}
+			/>
 			</ScrollView>
 
 		</View>
