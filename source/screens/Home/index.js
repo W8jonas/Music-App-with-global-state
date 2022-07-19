@@ -31,7 +31,7 @@ const OrderTypes = {
 	desc: 'desc',
 }
 
-export function Home({ navigation }) {
+export function Home({ navigation, fontSize }) {
 
 	const [order, setOrder] = useState(OrderTypes.asc)
 
@@ -55,10 +55,9 @@ export function Home({ navigation }) {
 			<View style={styles.titleContainer}>
 				<RenderTitle
 					text={"Primeira tela js!"}
-					customStyle={styles.titleText}
+					customStyle={{...styles.titleText, fontSize}}
 				/>
 			</View>
-
 
 			<ScrollView>
 				<Text style={styles.title}>Desenvolvimento do app</Text>
@@ -81,6 +80,7 @@ export function Home({ navigation }) {
 		</View>
 	);
 }
+
 
 const styles = StyleSheet.create({
 	titleContainer: {
@@ -106,6 +106,4 @@ const styles = StyleSheet.create({
 		marginTop: 36,
 	}
 });
-
-
 
