@@ -1,83 +1,16 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native';
 
-function RenderTitle(props) {
-	return <Text style={props.customStyle}>{props.text}</Text>
-}
-
-function RenderRow(props) {
-	return <Text style={props.customStyle}>{props.text}</Text>
-}
-
-
-function RenderList(props) {
-
+export function Home({ navigation }) {
 	return (
-		<>
-			<Text style={styles.titleList} >
-				{props.title}
-			</Text>
+		<ScrollView>
+			<Text style={styles.title}>Texto Home</Text>
 
-			{props.names.map(function (name) {
-				return <RenderRow key={name} text={name} customStyle={{}} />
-			})}
-		</>
-	)
-}
+			<TouchableOpacity onPress={() => {}}>
+				<Text>Texto Home</Text>
+			</TouchableOpacity>
 
-
-const OrderTypes = {
-	asc: 'asc',
-	desc: 'desc',
-}
-
-export function Home({ navigation, fontSize }) {
-
-	const [order, setOrder] = useState(OrderTypes.asc)
-
-	function handleUpdateOrder() {
-		setOrder(oldValue => oldValue === OrderTypes.asc ? OrderTypes.desc : OrderTypes.asc)
-	}
-
-	const listNamesOrder = useMemo(() => {
-		const newList = ["Ana", "Edney", "Jonas", "Gabi", "Vinícius"].sort((a, b) => {
-			if (order === OrderTypes.asc) {
-				return a.localeCompare(b)
-			}
-			return b.localeCompare(a)
-		})
-
-		return newList
-	}, [order])
-
-	return (
-		<View>
-			<View style={styles.titleContainer}>
-				<RenderTitle
-					text={"Primeira tela js!"}
-					customStyle={{...styles.titleText, fontSize}}
-				/>
-			</View>
-
-			<ScrollView>
-				<Text style={styles.title}>Desenvolvimento do app</Text>
-
-				<TouchableOpacity onPress={handleUpdateOrder}>
-					<Text>Alterar ordem da lista</Text>
-				</TouchableOpacity>
-
-				<RenderList
-					title="Lista de participantes do projeto:"
-					names={listNamesOrder}
-				/>
-
-			<Button
-				title="Mudar para segunda tela "
-				onPress={() => navigation.navigate('Segunda tela')}
-			/>
-			</ScrollView>
-
-		</View>
+		</ScrollView>
 	);
 }
 
