@@ -4,42 +4,34 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Configurations } from './source/screens/Configurations';
-import { FontConfigurations } from './source/screens/FontConfigurations';
-import { ColorsConfigurations } from './source/screens/ColorsConfigurations';
+import { Profile } from './source/screens/Profile';
+import { PlayerScreen } from './source/screens/PlayerScreen';
+import { Search } from './source/screens/Search';
 import { Home } from './source/screens/Home';
-import { useState } from 'react';
 
 
 const Stack = createStackNavigator();
 
-function StackNavigator({handleUpdateFonte, fontSize}) {
+function StackNavigator() {
 
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
-				name="Configurações"
-				component={Configurations}
+				name="Home"
+				component={Home}
 			/>
 
 			<Stack.Screen
-				name="Configurações de fonte"
+				name="Player"
 				component={
 					function RenderFontConfigurations(props) {
 						return (
-							<FontConfigurations
+							<PlayerScreen
 								{...props}
-								handleUpdateFonte={handleUpdateFonte}
-								fontSize={fontSize}
 							/>
 						)
 					}
 				}
-			/>
-
-			<Stack.Screen
-				name="Configurações de cores"
-				component={ColorsConfigurations}
 			/>
 		</Stack.Navigator>
 	);
@@ -49,12 +41,6 @@ function StackNavigator({handleUpdateFonte, fontSize}) {
 const Tabs = createBottomTabNavigator();
 
 export default function App() {
-
-	const [fontSize, setFontSize] = useState(16)
-
-	function handleUpdateFonte(newFontSize) {
-		setFontSize(newFontSize)
-	}
 
 	return (
 		<NavigationContainer>
@@ -69,21 +55,26 @@ export default function App() {
 					},
 				}}
 			>
-
 				<Tabs.Screen
 					name="Home"
-					component={function RenderHome(props) {
-						return <Home {...props} fontSize={fontSize} />
+					component={function RenderStackNavigator(props) {
+						return <StackNavigator {...props} />
 					}}
 				/>
 
 				<Tabs.Screen
-					name="Configurações"
-					component={function RenderStackNavigator(props) {
-						return <StackNavigator {...props} handleUpdateFonte={handleUpdateFonte} fontSize={fontSize} />
+					name="Search"
+					component={function RenderSearch(props) {
+						return <Search {...props} />
 					}}
 				/>
 
+				<Tabs.Screen
+					name="Profile"
+					component={function RenderProfile(props) {
+						return <Profile {...props} />
+					}}
+				/>
 			</Tabs.Navigator>
 		</NavigationContainer>
 	)
