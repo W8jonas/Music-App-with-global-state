@@ -20,12 +20,10 @@ export function Music(props) {
 const styles = StyleSheet.create({
     musicComponent: {
         margin: 20,
-        // display: 'flex',
         flexDirection: 'row',
     },
 
     musicText: {
-        // display: 'flex',
         flexDirection: 'column',
     },
 
@@ -40,9 +38,9 @@ const styles = StyleSheet.create({
     },
 
     musicImage: {
-        width: '64.56p',
-        height: '65',
-        borderRadius: '6',
+        width: 64,
+        height: 65,
+        borderRadius: 6,
         backgroundColor: 'gray',
     }
 
