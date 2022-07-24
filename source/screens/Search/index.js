@@ -1,17 +1,3 @@
-// import { useState } from 'react';
-// import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native';
-
-// export function Search({ navigation }) {
-// 	return (
-// 		<View style={{ flex: 1 }}>
-//             <View style={{ margin: 20, padding: 20 }}>
-//                 <Text>Search</Text>
-//             </View>
-// 		</View>
-// 	);
-// }
-
-
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native';
@@ -25,35 +11,29 @@ export function Search({ navigation }) {
         <View style={styles.pageAppearance}>
 
             <View style={styles.topContainer}>
-
                 <Text style={styles.searchTop}>Pesquisa</Text>
 
                 <StatusBar 
-                  style= "light"
-                  backgroundColor= "blue"
-                  color = "white"
+					style= "light"
+					backgroundColor= "blue"
+					color = "white"
                 />
-
             </View>
 
             <View> 
-
                 <Text style={styles.primerText}>Últimas tocadas</Text>
 
-                <Music></Music>
-                <Music></Music>
-                <Music></Music>
-
+                <Music />
+                <Music />
+                <Music />
             </View>
 
             <View> 
-
                 <Text style={styles.primerText}>Todas</Text>
 
-                <Music></Music>
-                <Music></Music>
-                <Music></Music>
-
+                <Music />
+                <Music />
+                <Music />
             </View>
 
         </View>
