@@ -6,7 +6,7 @@ export function Home({ navigation }) {
 		<ScrollView>
 			<Text style={styles.title}>Texto Home</Text>
 
-			<TouchableOpacity onPress={() => {}}>
+			<TouchableOpacity onPress={() => {navigation.navigate('Player')}}>
 				<Text>Texto Home</Text>
 			</TouchableOpacity>
 

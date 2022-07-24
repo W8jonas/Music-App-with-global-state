@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native';
+import { Audio } from 'expo-av';
 
 export function PlayerScreen({handleUpdateFonte, fontSize}) {
 	return (
