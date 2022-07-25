@@ -15,6 +15,7 @@ export function PlayerScreen() {
 
 	const [soundPlayingNow, setSoundPlayingNow] = useState(false)
 
+
 	async function playSound(_newSoundToPlay) {
 
 		const newSoundToPlay = _newSoundToPlay ? _newSoundToPlay : actualSoundData
@@ -30,21 +31,12 @@ export function PlayerScreen() {
 		setSoundPlayingNow(true)
 	}
 
-	useEffect(() => {
-		return sound
-			? () => {
-				sound.unloadAsync();
-			}
-			: undefined;
-	}, [sound]);
-
 
 	function handleChangeActualSound(changeType) {
 
 		const actualSoundIndex = soundsData.findIndex(sounds => sounds.id === actualSoundData.id ? true : false)
 
 		if (changeType === '-') {
-
 			const newSoundDataIndex = actualSoundIndex > 0 ? soundsData.length - 1 : 0
 			playSound(soundsData[newSoundDataIndex])
 
@@ -52,7 +44,6 @@ export function PlayerScreen() {
 		}
 
 		if (changeType === '+') {
-
 			const newSoundDataIndex = actualSoundIndex < soundsData.length - 1 ? actualSoundIndex + 1 : soundsData.length - 1
 			playSound(soundsData[newSoundDataIndex])
 
@@ -60,11 +51,19 @@ export function PlayerScreen() {
 		}
 	}
 
-
 	function pauseSound() {
 		sound.pauseAsync()
+		setSoundPlayingNow(false)
 	}
 
+
+	useEffect(() => {
+		return sound
+			? () => {
+				sound.unloadAsync();
+			}
+			: undefined;
+	}, [sound]);
 
 	return (
 		<View style={{ flex: 1, margin: 20, padding: 20, alignItems: 'center', justifyContent: 'space-around' }}>
