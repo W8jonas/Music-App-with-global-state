@@ -14,10 +14,10 @@ export function PlayerScreen() {
 	const [actualSoundData, setActualSoundData] = useState(soundsData[0])
 
 	async function playSound() {
-		const { sound } = await Audio.Sound.createAsync({uri: actualSoundData.uri});
-		setSound(sound);
+		const { sound : _sound } = await Audio.Sound.createAsync({uri: actualSoundData.uri});
+		setSound(_sound);
 
-		await sound.playAsync();
+		await _sound.playAsync();
 	}
 
 	useEffect(() => {
@@ -49,6 +49,14 @@ export function PlayerScreen() {
 			return
 		}
 	}
+
+	useEffect(() => {
+		if (sound) {
+			sound.unloadAsync()
+			playSound()
+		}
+
+	}, [actualSoundData]);
 
 
 	return (
