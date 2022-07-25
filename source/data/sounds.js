@@ -40,4 +40,3 @@ export const soundsData = [
 		imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
 	}
 ]
-

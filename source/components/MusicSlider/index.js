@@ -23,7 +23,7 @@ export function MusicSlider({soundDuration, sound}) {
             thumbTintColor="#FFFFFF"
             maximumTrackTintColor="#C4C4C4"
             value={actualValueSound || 0}
-            // onSlidingComplete={handleSeek}
+            // onSlidingComplete={}
         /> 
     )
 }

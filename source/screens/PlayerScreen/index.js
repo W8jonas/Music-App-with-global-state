@@ -37,7 +37,7 @@ export function PlayerScreen() {
 		const actualSoundIndex = soundsData.findIndex(sounds => sounds.id === actualSoundData.id ? true : false)
 
 		if (changeType === '-') {
-			const newSoundDataIndex = actualSoundIndex > 0 ? soundsData.length - 1 : 0
+			const newSoundDataIndex = actualSoundIndex > 0 ? actualSoundIndex - 1 : 0
 			playSound(soundsData[newSoundDataIndex])
 
 			return
@@ -50,6 +50,7 @@ export function PlayerScreen() {
 			return
 		}
 	}
+
 
 	function pauseSound() {
 		sound.pauseAsync()
