@@ -7,6 +7,7 @@ import imgMusic from '../../assets/emptyMusicValue.jpeg'
 const screenWidth = Dimensions.get('window').width
 
 import { soundsData } from '../../data/sounds'
+import { MusicSlider } from '../../components/MusicSlider';
 
 export function PlayerScreen() {
 
@@ -20,11 +21,9 @@ export function PlayerScreen() {
 
 		const newSoundToPlay = _newSoundToPlay ? _newSoundToPlay : actualSoundData
 
-		const { sound: _sound } = await Audio.Sound.createAsync({ uri: newSoundToPlay.uri });
-		setSound(_sound);
-		
-		const status = await _sound.getStatusAsync()
+		const { sound: _sound, status } = await Audio.Sound.createAsync({ uri: newSoundToPlay.uri });
 
+		setSound(_sound);
 		setActualSoundData({...newSoundToPlay, details: status})
 
 		await _sound.playAsync();
@@ -65,6 +64,7 @@ export function PlayerScreen() {
 			: undefined;
 	}, [sound]);
 
+
 	return (
 		<View style={{ flex: 1, margin: 20, padding: 20, alignItems: 'center', justifyContent: 'space-around' }}>
 
@@ -77,8 +77,11 @@ export function PlayerScreen() {
 				<Text>{actualSoundData.author}</Text>
 			</View>
 
-			<View>
-				<Text>Progress bar</Text>
+			<View style={{width: screenWidth * 0.9, height: 50}}>
+				<MusicSlider
+					soundDuration={actualSoundData?.details?.durationMillis}
+					sound={sound}
+				/>
 			</View>
 
 			<View>
