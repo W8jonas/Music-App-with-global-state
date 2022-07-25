@@ -8,28 +8,48 @@ const screenWidth = Dimensions.get('window').width
 
 import {soundsData} from '../../data/sounds'
 
-
 export function PlayerScreen() {
 
 	const [sound, setSound] = useState();
+	const [actualSoundData, setActualSoundData] = useState(soundsData[0])
 
 	async function playSound() {
-		console.log('Loading Sound');
-		const { sound } = await Audio.Sound.createAsync({uri: soundsData[0].uri});
+		const { sound } = await Audio.Sound.createAsync({uri: actualSoundData.uri});
 		setSound(sound);
 
-		console.log('Playing Sound');
 		await sound.playAsync();
 	}
 
 	useEffect(() => {
 		return sound
 			? () => {
-				console.log('Unloading Sound');
 				sound.unloadAsync();
 			}
 			: undefined;
 	}, [sound]);
+
+
+	function handleChangeActualSound(changeType) {
+
+		const actualSoundIndex = soundsData.findIndex(sounds => sounds.id === actualSoundData.id ? true : false)
+
+		if (changeType === '-') {
+
+			const newSoundDataIndex = actualSoundIndex > 0 ? soundsData.length - 1 : 0
+			setActualSoundData(soundsData[newSoundDataIndex])
+
+			return
+		}
+
+		if (changeType === '+') {
+
+			const newSoundDataIndex = actualSoundIndex < soundsData.length - 1 ? actualSoundIndex + 1 : soundsData.length - 1
+			setActualSoundData(soundsData[newSoundDataIndex])
+			
+			return
+		}
+	}
+
 
 	return (
 		<View style={{ flex: 1, margin: 20, padding: 20, alignItems: 'center', justifyContent: 'space-around' }}>
@@ -48,7 +68,7 @@ export function PlayerScreen() {
 			</View>
 
 			<View>
-				<TouchableOpacity onPress={() => {}}>
+				<TouchableOpacity onPress={() => {handleChangeActualSound('-')}}>
 					<Text>Anterior</Text>
 				</TouchableOpacity>
 
@@ -56,7 +76,7 @@ export function PlayerScreen() {
 					<Text>Iniciar</Text>
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => {}}>
+				<TouchableOpacity onPress={() => {handleChangeActualSound('+')}}>
 					<Text>Próxima</Text>
 				</TouchableOpacity>
 

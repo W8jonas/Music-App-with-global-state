@@ -1,5 +1,6 @@
 export const soundsData = [
 	{
+		id: '001',
 		title: 'Hamlet - Act I',
 		author: 'William Shakespeare',
 		source: 'Librivox',
@@ -7,6 +8,7 @@ export const soundsData = [
 		imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
 	},
 	{
+		id: '002',
 		title: 'Hamlet - Act II',
 		author: 'William Shakespeare',
 		source: 'Librivox',
@@ -14,6 +16,7 @@ export const soundsData = [
 		imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
 	},
 	{
+		id: '003',
 		title: 'Hamlet - Act III',
 		author: 'William Shakespeare',
 		source: 'Librivox',
@@ -21,6 +24,7 @@ export const soundsData = [
 		imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
 	},
 	{
+		id: '004',
 		title: 'Hamlet - Act IV',
 		author: 'William Shakespeare',
 		source: 'Librivox',
@@ -28,6 +32,7 @@ export const soundsData = [
 		imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
 	},
 	{
+		id: '005',
 		title: 'Hamlet - Act V',
 		author: 'William Shakespeare',
 		source: 'Librivox',
