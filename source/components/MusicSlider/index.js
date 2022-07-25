@@ -19,9 +19,9 @@ export function MusicSlider({soundDuration, sound}) {
             style={{ width: 350, height: 40 }}
             minimumValue={0}
             maximumValue={soundDuration || 0}
-            minimumTrackTintColor="#C07037"
-            thumbTintColor="red"
-            maximumTrackTintColor="#000"
+            minimumTrackTintColor="#0500FF"
+            thumbTintColor="#FFFFFF"
+            maximumTrackTintColor="#C4C4C4"
             value={actualValueSound || 0}
             // onSlidingComplete={handleSeek}
         /> 
