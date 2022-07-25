@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Audio } from 'expo-av';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import imgMusic from '../../assets/emptyMusicValue.jpeg'
 
@@ -66,15 +67,19 @@ export function PlayerScreen() {
 
 
 	return (
-		<View style={{ flex: 1, margin: 20, padding: 20, alignItems: 'center', justifyContent: 'space-around' }}>
+		<LinearGradient
+			colors={['#0500FF', '#4341AC', '#16145B', '#000']}
+			start={{ x: 1, y: 0 }}
+			end={{ x: 0.5, y: 1 }}
+			style={styles.container}
+		>
+			<Text style={styles.baseText} >{actualSoundData.source}</Text>
 
-			<Text>{actualSoundData.source}</Text>
-
-			<Image style={{ width: screenWidth * 0.9, height: screenWidth * 0.9 }} source={imgMusic} />
+			<Image style={{ width: screenWidth * 0.9, height: screenWidth * 0.9, resizeMode: 'cover' }} source={{uri: actualSoundData.imageSource}} />
 
 			<View>
-				<Text>{actualSoundData.title}</Text>
-				<Text>{actualSoundData.author}</Text>
+				<Text style={[styles.baseText, styles.title]} >{actualSoundData.title}</Text>
+				<Text style={styles.baseText} >{actualSoundData.author}</Text>
 			</View>
 
 			<View style={{width: screenWidth * 0.9, height: 50}}>
@@ -84,24 +89,39 @@ export function PlayerScreen() {
 				/>
 			</View>
 
-			<View>
+			<View style={styles.menuPlayer}>
 				<TouchableOpacity onPress={() => { handleChangeActualSound('-') }}>
-					<Text>Anterior</Text>
+					<Text style={styles.baseText} >Anterior</Text>
 				</TouchableOpacity>
 
 				{soundPlayingNow ? <TouchableOpacity onPress={pauseSound}>
-						<Text>Pausar</Text>
+						<Text style={styles.baseText} >Pausar</Text>
 					</TouchableOpacity> 
 					: <TouchableOpacity onPress={() => playSound()}>
-						<Text>Iniciar</Text>
+						<Text style={styles.baseText} >Iniciar</Text>
 					</TouchableOpacity>
 				}
 
 				<TouchableOpacity onPress={() => { handleChangeActualSound('+') }}>
-					<Text>Próxima</Text>
+					<Text style={styles.baseText} >Próxima</Text>
 				</TouchableOpacity>
-
 			</View>
-		</View>
+      	</LinearGradient>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1, padding: 40, alignItems: 'center', justifyContent: 'space-around'
+	},
+	menuPlayer: {
+		width: '100%', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'
+	},
+	baseText: {
+		color: 'white',
+		textAlign: 'center',
+	},
+	title: {
+		fontWeight: 'bold',
+	},
+})
