@@ -15,10 +15,17 @@ export function PlayerScreen() {
 
 	const [soundPlayingNow, setSoundPlayingNow] = useState(false)
 
-	async function playSound() {
-		const { sound: _sound } = await Audio.Sound.createAsync({ uri: actualSoundData.uri });
+	async function playSound(_newSoundToPlay) {
+
+		const newSoundToPlay = _newSoundToPlay ? _newSoundToPlay : actualSoundData
+
+		const { sound: _sound } = await Audio.Sound.createAsync({ uri: newSoundToPlay.uri });
 		setSound(_sound);
 		
+		const status = await _sound.getStatusAsync()
+
+		setActualSoundData({...newSoundToPlay, details: status})
+
 		await _sound.playAsync();
 		setSoundPlayingNow(true)
 	}
@@ -39,7 +46,7 @@ export function PlayerScreen() {
 		if (changeType === '-') {
 
 			const newSoundDataIndex = actualSoundIndex > 0 ? soundsData.length - 1 : 0
-			setActualSoundData(soundsData[newSoundDataIndex])
+			playSound(soundsData[newSoundDataIndex])
 
 			return
 		}
@@ -47,7 +54,7 @@ export function PlayerScreen() {
 		if (changeType === '+') {
 
 			const newSoundDataIndex = actualSoundIndex < soundsData.length - 1 ? actualSoundIndex + 1 : soundsData.length - 1
-			setActualSoundData(soundsData[newSoundDataIndex])
+			playSound(soundsData[newSoundDataIndex])
 
 			return
 		}
@@ -57,14 +64,6 @@ export function PlayerScreen() {
 	function pauseSound() {
 		sound.pauseAsync()
 	}
-
-	useEffect(() => {
-		if (sound) {
-			sound.unloadAsync()
-			playSound()
-		}
-
-	}, [actualSoundData]);
 
 
 	return (
@@ -91,7 +90,7 @@ export function PlayerScreen() {
 				{soundPlayingNow ? <TouchableOpacity onPress={pauseSound}>
 						<Text>Pausar</Text>
 					</TouchableOpacity> 
-					: <TouchableOpacity onPress={playSound}>
+					: <TouchableOpacity onPress={() => playSound()}>
 						<Text>Iniciar</Text>
 					</TouchableOpacity>
 				}
