@@ -19,7 +19,9 @@ function StackNavigator({globalSound}) {
 		<Stack.Navigator>
 			<Stack.Screen
 				name="Home"
-				component={Home}
+				component={function RenderHomeScreen(props) {
+                    return <Home {...props} globalSound={globalSound} />
+                }}
 			/>
 
 			<Stack.Screen
