@@ -15,25 +15,21 @@ import { memo } from 'react';
 const Stack = createStackNavigator();
 
 function StackNavigator({globalSound}) {
-
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
 				name="Home"
-				component={memo(function RenderHomeScreen(props) {
-                    return <Home {...props} globalSound={globalSound} />
-                })}
+				component={memo((props) => <Home {...props} globalSound={globalSound} />)}
 			/>
 
 			<Stack.Screen
 				name="Player"
-				component={memo(function RenderPlayerScreen(props) {
-						return <PlayerScreen {...props} globalSound={globalSound} />
-                })}
+				component={memo((props) => <PlayerScreen {...props} globalSound={globalSound} />)}
 			/>
 		</Stack.Navigator>
 	);
 }
+
 
 
 const Tabs = createBottomTabNavigator();
@@ -57,26 +53,19 @@ export function Routes() {
 			>
 				<Tabs.Screen
 					name="Home"
-					component={memo(function RenderStackNavigator(props) {
-						return <StackNavigator {...props} globalSound={globalSound} />
-					})}
+					component={memo((props) => <StackNavigator {...props} globalSound={globalSound} /> )}
 				/>
 
 				<Tabs.Screen
 					name="Search"
-					component={memo(function RenderSearch(props) {
-						return <Search {...props} globalSound={globalSound} />
-					})}
+					component={memo((props) => <Search {...props} globalSound={globalSound} /> )}
 				/>
 
 				<Tabs.Screen
 					name="Profile"
-					component={memo(function RenderProfile(props) {
-						return <Profile {...props} globalSound={globalSound} />
-					})}
+					component={memo((props) => <Profile {...props} globalSound={globalSound} /> )}
 				/>
 			</Tabs.Navigator>
 		</NavigationContainer>
 	)
 }
-
