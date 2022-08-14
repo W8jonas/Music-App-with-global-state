@@ -8,6 +8,7 @@ import { Search } from '../screens/Search';
 import { Profile } from '../screens/Profile';
 import { soundsData } from '../data/sounds';
 import { useSound } from '../Hooks/useSound';
+import { memo } from 'react';
 
 
 
@@ -19,16 +20,16 @@ function StackNavigator({globalSound}) {
 		<Stack.Navigator>
 			<Stack.Screen
 				name="Home"
-				component={function RenderHomeScreen(props) {
+				component={memo(function RenderHomeScreen(props) {
                     return <Home {...props} globalSound={globalSound} />
-                }}
+                })}
 			/>
 
 			<Stack.Screen
 				name="Player"
-				component={function RenderPlayerScreen(props) {
+				component={memo(function RenderPlayerScreen(props) {
 						return <PlayerScreen {...props} globalSound={globalSound} />
-                }}
+                })}
 			/>
 		</Stack.Navigator>
 	);
@@ -56,23 +57,23 @@ export function Routes() {
 			>
 				<Tabs.Screen
 					name="Home"
-					component={function RenderStackNavigator(props) {
+					component={memo(function RenderStackNavigator(props) {
 						return <StackNavigator {...props} globalSound={globalSound} />
-					}}
+					})}
 				/>
 
 				<Tabs.Screen
 					name="Search"
-					component={function RenderSearch(props) {
+					component={memo(function RenderSearch(props) {
 						return <Search {...props} globalSound={globalSound} />
-					}}
+					})}
 				/>
 
 				<Tabs.Screen
 					name="Profile"
-					component={function RenderProfile(props) {
+					component={memo(function RenderProfile(props) {
 						return <Profile {...props} globalSound={globalSound} />
-					}}
+					})}
 				/>
 			</Tabs.Navigator>
 		</NavigationContainer>
