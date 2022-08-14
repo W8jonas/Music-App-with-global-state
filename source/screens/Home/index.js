@@ -1,14 +1,31 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button } from 'react-native';
 
-export function Home({ navigation }) {
+export function Home({ navigation, globalSound}) {
+
+	const { actualSoundData, soundPlayingNow, pauseSound, playSound } = globalSound
+
 	return (
 		<ScrollView>
+
+			<View>
+				<Text style={[styles.baseText, styles.title]} >{actualSoundData.title}</Text>
+				<Text style={styles.baseText} >{actualSoundData.author}</Text>
+			</View>
+
 			<Text style={styles.title}>Texto Home</Text>
 
 			<TouchableOpacity onPress={() => {navigation.navigate('Player')}}>
 				<Text>Texto Home</Text>
 			</TouchableOpacity>
+
+			{soundPlayingNow ? <TouchableOpacity onPress={pauseSound}>
+					<Text style={styles.baseText} >Pausar</Text>
+				</TouchableOpacity> 
+				: <TouchableOpacity onPress={() => playSound()}>
+					<Text style={styles.baseText} >Iniciar</Text>
+				</TouchableOpacity>
+			}
 
 		</ScrollView>
 	);
