@@ -9,6 +9,7 @@ export function useSound(soundsData) {
 
 	const [soundPlayingNow, setSoundPlayingNow] = useState(false)
 
+
 	const playSound = useCallback(async (_newSoundToPlay) => {
 		const newSoundToPlay = _newSoundToPlay ? _newSoundToPlay : actualSoundData
 
@@ -20,6 +21,7 @@ export function useSound(soundsData) {
 		await _sound.playAsync();
 		setSoundPlayingNow(true)
 	}, [actualSoundData])
+
 
 	const handleChangeActualSound = useCallback((changeType) => {
 		const actualSoundIndex = soundsData.findIndex(sounds => sounds.id === actualSoundData.id ? true : false)
@@ -37,7 +39,8 @@ export function useSound(soundsData) {
 
 			return
 		}
-	}, [soundsData, actualSoundData])
+	}, [soundsData, actualSoundData.id])
+
 
 	const pauseSound = useCallback(() => {
 		sound.pauseAsync()
